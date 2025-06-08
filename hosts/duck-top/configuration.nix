@@ -50,6 +50,8 @@
     NIXOS_OZONE_WL = "1";
   };
 
+  programs.zsh.enable = true;
+
   hardware = {
     # Opengl
     # Opengl.enable = true;
@@ -82,6 +84,7 @@
   # services.libinput.enable = true;
 
   programs.firefox.enable = true;
+    
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
