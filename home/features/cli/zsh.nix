@@ -9,7 +9,7 @@ in {
     programs.zsh = {
       enable = true;
 
-      ohMyZsh = {
+      oh-my-zsh = {
         enable = true;
         theme = "xiong-chiamiov-plus";
         plugins = [ "git" "zsh-users/zsh-autosuggestions" "zsh-users/zsh-syntax-highlighting" ];
