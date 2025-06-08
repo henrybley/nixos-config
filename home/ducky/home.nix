@@ -17,12 +17,33 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "24.05"; # Please read the comment before changing.
+  home.stateVersion = "25.05"; # Please read the comment before changing.
+
+  programs.zsh = {
+    enable = true; # Enables Zsh
+    enableCompletions = true; # Enables tab completion
+    autosuggestions.enable = true; # Enables autosuggestions
+    syntaxHighlighting.enable = true; # Enables syntax highlighting
+
+    oh-my-zsh = {
+      enable = true; 
+      theme = "robbyrussell"; # Choose a theme
+      plugins = [
+        "git" # Example plugins
+      ];
+    };
+  };
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    cowsay
+    #environment
+    waybar
+    mako
+    swww
+    rofi-wayland
+
+    kitty
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
