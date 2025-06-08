@@ -8,12 +8,10 @@ in {
   config = mkIf cfg.enable {
     programs.zsh = {
       enable = true;
-      autosuggestions.enable = true;
-      syntaxHighlighting.enable = true;
 
       oh-my-zsh = {
         enable = true;
-        theme = "robbyrussell"; # Choose a theme
+        theme = "robbyrussell";
         plugins = [ "git" "zsh-autosuggestions" "zsh-syntax-highlighting" ];
       };
     };
