@@ -9,10 +9,10 @@ in {
     programs.zsh = {
       enable = true;
 
-      oh-my-zsh = {
+      antidote = {
         enable = true;
-        theme = "robbyrussell";
-        plugins = [ "git" "zsh-autosuggestions" "zsh-syntax-highlighting" ];
+        package = pkgs.antidote;
+        plugins = [ "git" "zsh-users/zsh-autosuggestions" "zsh-users/zsh-syntax-highlighting" ];
       };
     };
   };
