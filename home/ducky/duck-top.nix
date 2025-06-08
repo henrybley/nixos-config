@@ -1,5 +1,5 @@
 { config, ... }: {
   imports = [ ../common ../features/cli ./home.nix ];
 
-  features = { cli = { fish.enable = true; }; };
+  features = { cli = { zsh.enable = true; }; };
 }

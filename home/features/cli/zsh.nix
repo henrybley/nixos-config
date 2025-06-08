@@ -2,7 +2,7 @@
 with lib;
 let cfg = config.features.cli.zsh;
 in {
-  options.features.cli.fish.enable =
+  options.features.cli.zsh.enable =
     mkEnableOption "enable extended zsh configuration";
 
   config = mkIf cfg.enable {
