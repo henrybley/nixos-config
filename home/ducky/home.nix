@@ -21,7 +21,7 @@
 
   programs.zsh = {
     enable = true; # Enables Zsh
-    enableCompletions = true; # Enables tab completion
+    #enableCompletions = true; # Enables tab completion
     #autosuggestion.enable = true; # Enables autosuggestions
     #syntaxHighlighting.enable = true; # Enables syntax highlighting
 
