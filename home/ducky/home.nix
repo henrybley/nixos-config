@@ -22,14 +22,16 @@
   programs.zsh = {
     enable = true; # Enables Zsh
     enableCompletions = true; # Enables tab completion
-    autosuggestions.enable = true; # Enables autosuggestions
-    syntaxHighlighting.enable = true; # Enables syntax highlighting
+    #autosuggestion.enable = true; # Enables autosuggestions
+    #syntaxHighlighting.enable = true; # Enables syntax highlighting
 
     oh-my-zsh = {
       enable = true; 
       theme = "robbyrussell"; # Choose a theme
       plugins = [
-        "git" # Example plugins
+        "git"
+        "zsh-autosuggestions"
+        "zsh-syntax-highlighting"
       ];
     };
   };
