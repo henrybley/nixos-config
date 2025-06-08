@@ -1,1 +1,5 @@
-{ config, ... }: { imports = [ ../common ../features/cli ./home.nix ]; }
+{ config, ... }: {
+  imports = [ ../common ../features/cli ./home.nix ];
+
+  features = { cli = { fish.enable = true; }; };
+}
