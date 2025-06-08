@@ -24,16 +24,6 @@
     #enableCompletions = true; # Enables tab completion
     #autosuggestion.enable = true; # Enables autosuggestions
     #syntaxHighlighting.enable = true; # Enables syntax highlighting
-
-    oh-my-zsh = {
-      enable = true; 
-      theme = "robbyrussell"; # Choose a theme
-      plugins = [
-        "git"
-        "zsh-autosuggestions"
-        "zsh-syntax-highlighting"
-      ];
-    };
   };
 
   # The home.packages option allows you to install Nix packages into your
