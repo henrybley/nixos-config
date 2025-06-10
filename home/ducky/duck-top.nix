@@ -1,5 +1,5 @@
 { config, ... }: {
-  imports = [ ../common ../features/cli ..features/desktop ./home.nix ];
+  imports = [ ../common ../features/cli ../features/desktop ./home.nix ];
 
   features = {
     cli = {
