@@ -10,7 +10,7 @@ in {
       enable = true;
 
       # Install plugins with Nix
-      ohMyZsh = {
+      oh-my-zsh = {
         enable = false; # disable oh-my-zsh to avoid conflicts
       };
 
