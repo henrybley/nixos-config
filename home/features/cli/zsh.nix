@@ -8,34 +8,32 @@ in {
   config = mkIf cfg.enable {
     programs.zsh = {
       enable = true;
-
-      # Install plugins with Nix
-      oh-my-zsh = {
-        enable = false; # disable oh-my-zsh to avoid conflicts
-      };
-
-      # Zsh plugins as packages
-      plugins = [
-        {
-          name = "zsh-autosuggestions";
-          src = pkgs.zsh-autosuggestions;
-        }
-        {
-          name = "zsh-syntax-highlighting";
-          src = pkgs.zsh-syntax-highlighting;
-        }
-      ];
-
-      interactiveShellInit = ''
-        # xiong-chiamiov-plus prompt
-        PROMPT=$'%{\e[0;34m%}%B┌─[%b%{\e[0m%}%{\e[1;32m%}%n%{\e[1;30m%}@%{\e[0m%}%{\e[0;36m%}%m%{\e[0;34m%}%B]%b%{\e[0m%} - %b%{\e[0;34m%}%B[%b%{\e[1;37m%}%~%{\e[0;34m%}%B]%b%{\e[0m%} - %{\e[0;34m%}%B[%b%{\e[0;33m%}'%D{"%a %b %d, %H:%M"}%b$'%{\e[0;34m%}%B]%b%{\e[0m%}
-        %{\e[0;34m%}%B└─%B[%{\e[1;35m%}$%{\e[0;34m%}%B] <$(git_prompt_info)>%{\e[0m%}%b '
-
-        PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
-
-        # Source plugins manually
-        source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-        source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+      prezto.caseSensitive = false;
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
+      initExtra = ''
+          setopt autocd # auto cd when only path is entered
+          setopt nomatch # throw an error on glob matching nothing
+          setopt nonomatch
+          setopt appendhistory
+          setopt hist_ignore_all_dups # remove older duplicate entries from history
+          setopt hist_reduce_blanks # remove superfluous blanks from history items
+          setopt inc_append_history # save history entries as soon as they are entered
+          setopt share_history # share history between different instances of the shell
+          setopt auto_cd # cd by typing directory name if it's not a command
+          unsetopt correct_all
+          setopt auto_list # automatically list choices on ambiguous completion
+          setopt auto_menu # automatically use menu completion
+          setopt always_to_end # move cursor to end if word had one match
+          setopt incappendhistory  #Immediately append to the history file, not just when a term is killed
+          zstyle ':completion:*' menu select # select completions with arrow keys
+          zstyle ':completion:*' group-name \'\' # group results by category
+          zstyle ':completion:::::' completer _expand _complete _ignored _approximate #enable approximate matches for completion
+          export PATH=$PATH:$HOME/.local/bin:/home/${username}/.cargo/bin:/home/${username}/.spicetify
+          export NIX_PAGER=cat
+          export PROMPT_EOL_MARK=" "
+          [ -f "$HOME/.config/zsh/colors_and_functions.zsh" ] && source $HOME/.config/zsh/colors_and_functions.zsh
       '';
     };
   };
