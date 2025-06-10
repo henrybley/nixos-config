@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./zsh.nix ];
+  imports = [ ./zsh.nix ./fzf.nix ];
   programs.eza = {
     enable = true;
     extraOptions = [ "-1" "--icons" "--git" "-a" ];
