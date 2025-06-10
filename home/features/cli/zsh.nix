@@ -37,6 +37,7 @@ in {
       '';
       oh-my-zsh = {
         enable = true;
+        theme = "robbyrussell";
         plugins = [
           "sudo"
           "history-substring-search"
