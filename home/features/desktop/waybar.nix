@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 with lib;
-let cfg = config.features.cli.waybar;
+let cfg = config.features.desktop.waybar;
 in {
   options.features.desktop.waybar.enable = mkEnableOption "waybar config";
 
