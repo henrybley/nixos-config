@@ -1,5 +1,6 @@
 { pkgs, ... }: {
-  imports = [ ./zsh.nix ./nvim.nix ./fzf.nix ./neofetch.nix ];
+  imports = [ ./zsh.nix ./fzf.nix ./neofetch.nix ];
+
   programs.eza = {
     enable = true;
     extraOptions = [ "-1" "--icons" "--git" "-a" ];

@@ -12,7 +12,7 @@ in {
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      initExtra = ''
+      initContent = ''
         setopt autocd # auto cd when only path is entered
         setopt nomatch # throw an error on glob matching nothing
         setopt nonomatch
