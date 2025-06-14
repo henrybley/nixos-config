@@ -26,8 +26,8 @@ in {
         "$screenshot" = "$HOME/.config/rofi/bin/screenshot";
 
         # Main modifier keys
-        "$mainMod" = "ALT";
-        "$guiMod" = "SUPER";
+        "$mainMod" = "SUPER";
+        "$secondMod" = "ALT";
 
         # Autostart applications
         "exec-once" = [
@@ -221,9 +221,7 @@ in {
           "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
         ];
 
-        windowrulev2 = [
-          "workspace 3,opacity 1.0, class:(brave-browser)"
-        ];
+        windowrulev2 = [ "workspace 3,opacity 1.0, class:(brave-browser)" ];
       };
     };
   };
