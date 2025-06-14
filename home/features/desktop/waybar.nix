@@ -32,7 +32,7 @@ in {
         #window,
         #clock,
         #tray, 
-        #wireplumer, 
+        #wireplumber, 
         #network, 
         #wireplumber, 
         #custom-spotify, 
