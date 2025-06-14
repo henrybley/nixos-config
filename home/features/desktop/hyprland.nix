@@ -7,13 +7,8 @@ in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
+      xwayland.enable = true;
       settings = {
-        # Monitor configuration
-        monitor = [
-          #"HDMI-A-1, 1920x1080, 1080x440, 1"
-          #"DP-1, 1920x1080, 0x0, 1, transform, 1"
-          ",preferred,auto,auto"
-        ];
 
         # Program variables
         "$terminal" = "kitty";

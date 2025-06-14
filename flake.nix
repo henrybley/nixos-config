@@ -16,9 +16,14 @@
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+
+    nvim-config = {
+      url = "git+https://github.com/henrybley/nvim.git";
+      flake = false;
+    };
   };
 
-  outputs = { self, home-manager, nixpkgs, ... }@inputs:
+  outputs = { self, home-manager, nvim-config, nixpkgs, ... }@inputs:
     let
       inherit (self) outputs;
       systems = [
