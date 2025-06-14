@@ -11,11 +11,11 @@ in {
       enable = true;
 
       #font = {
-            #  name = "JetBrains Mono";
-            #size = 9.0;
-            #};
+      #  name = "JetBrains Mono";
+      #size = 9.0;
+      #};
 
-      settings = { disable_ligatures = "always"; };
+      #settings = { disable_ligatures = "always"; };
 
       extraConfig = ''
         cursor_trail 3

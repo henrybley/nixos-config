@@ -34,7 +34,7 @@
         name = "JetBrainsMono Nerd Font Mono";
       };
     };
-    targets.kitty.enable = true;
+    #targets.kitty.enable = true;
 
   };
 
