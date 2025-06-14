@@ -5,7 +5,7 @@
     lua-language-server
     nil
     nixfmt
-    php-cs-fixer
+    php83Packages.php-cs-fixer
     phpactor
     prettierd
     python313Packages.python-lsp-server
