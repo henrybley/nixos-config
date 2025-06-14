@@ -37,7 +37,7 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  stylix = {
+  programs.stylix = {
     enable = true;
     base16Scheme = "gruvbox-dark-hard";
     fonts = {
