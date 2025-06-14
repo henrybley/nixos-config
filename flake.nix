@@ -54,7 +54,7 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             ./home/ducky/duck-top.nix
-            inputs.stylix.homeManagerModules.stylix
+            stylix.nixosModules.stylix
           ];
         };
       };

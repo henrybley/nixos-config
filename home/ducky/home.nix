@@ -19,7 +19,7 @@
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-  programs.stylix = {
+  stylix = {
     enable = true;
     base16Scheme = "gruvbox-dark-hard";
     fonts = {
