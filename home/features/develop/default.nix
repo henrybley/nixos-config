@@ -4,7 +4,7 @@
   home.packages = with pkgs; [
     lua-language-server
     nil
-    nixfmt
+    nixfmt-rfc-style
     php83Packages.php-cs-fixer
     phpactor
     prettierd
