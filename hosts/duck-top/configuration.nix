@@ -40,7 +40,7 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    displayManager.enable = false;
+    displayManager.lightdm.enable = false;
   };
 
   environment.sessionVariables = {
