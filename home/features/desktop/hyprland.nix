@@ -31,18 +31,10 @@ in {
 
         # Autostart applications
         "exec-once" = [
+          "waybar"
           "hyprpaper"
+          "hypridle"
           "systemctl --user enable --now hyprland-autoname-workspaces.service"
-          "~/.config/waybar/launch.sh"
-          "bash ~/.config/hypr/start.sh"
-        ];
-
-        # Execute commands
-        exec = [
-          ''
-            gsettings set org.gnome.desktop.interface gtk-theme "YOUR_DARK_GTK3_THEME"''
-          ''
-            gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"''
         ];
 
         # Environment variables
@@ -50,6 +42,7 @@ in {
           "XCURSOR_SIZE,24"
           "HYPRCURSOR_SIZE,24"
           "QT_QPA_PLATFORMTHEME,qt6ct"
+          "GTK_THEME,Dracula"
         ];
 
         # General settings
