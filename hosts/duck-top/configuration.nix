@@ -50,8 +50,6 @@
         name = "JetBrainsMono Nerd Font Mono";
       };
     };
-
-    targets.kitty.enable = true;
   };
 
   # Enable the X11 windowing system.
