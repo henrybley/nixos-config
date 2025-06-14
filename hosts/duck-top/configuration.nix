@@ -37,17 +37,6 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  programs.stylix = {
-    enable = true;
-    base16Scheme = "gruvbox-dark-hard";
-    fonts = {
-      sansSerif = "JetBrains Mono";
-      monospace = "JetBrains Mono";
-    };
-
-    targets.kitty.enable = true;
-  };
-
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
