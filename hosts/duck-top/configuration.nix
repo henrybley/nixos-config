@@ -37,7 +37,23 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    fonts = {
+      sansSerif = {
+        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        name = "JetBrainsMono Nerd Font Mono";
+      };
+      serif = {
+        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        name = "JetBrainsMono Nerd Font Mono";
+      };
+    };
+
+    targets.kitty.enable = true;
+  };
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
