@@ -19,7 +19,7 @@
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-  progams.stylix.enable = true;
+  programs.stylix.enable = true;
   programs.stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
 
   # The home.packages option allows you to install Nix packages into your
