@@ -25,11 +25,11 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
     fonts = {
       sansSerif = {
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        package = pkgs.nerdfonts.JetBrainsMono;
         name = "JetBrainsMono Nerd Font Mono";
       };
       serif = {
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        package = pkgs.nerdfonts.JetBrainsMono;
         name = "JetBrainsMono Nerd Font Mono";
       };
     };
