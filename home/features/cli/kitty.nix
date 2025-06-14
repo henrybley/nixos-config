@@ -22,6 +22,6 @@ in {
         cursor_trail_decay 0.1 0.4
       '';
     };
-    programs.stylix.targets.kitty.enable = true;
+    stylix.targets.kitty.enable = true;
   };
 }
