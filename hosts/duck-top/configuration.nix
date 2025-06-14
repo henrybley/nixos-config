@@ -5,10 +5,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -20,7 +19,8 @@
   networking.hostName = "duck-top"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable =
+    true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/Brussels";
@@ -38,8 +38,11 @@
   # };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  
+  services.xserver = {
+    enable = true;
+    displayManager.enable = false;
+  };
+
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
@@ -50,10 +53,9 @@
   hardware = {
     # Opengl
     # Opengl.enable = true;
-    
+
     nvidia.modesetting.enable = true;
   };
-  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -79,7 +81,6 @@
   # services.libinput.enable = true;
 
   programs.firefox.enable = true;
-    
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -93,7 +94,7 @@
     #cli
     wget
     git
-    
+
     #browser
     brave
   ];

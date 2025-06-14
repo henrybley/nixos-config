@@ -212,5 +212,11 @@ in {
         windowrulev2 = [ "workspace 3,opacity 1.0, class:(brave-browser)" ];
       };
     };
+
+    programs.zsh.profileExtra = ''
+      if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+        exec Hyprland
+      fi
+    '';
   };
 }
