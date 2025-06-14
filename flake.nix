@@ -45,17 +45,15 @@
       nixosConfigurations = {
         duck-top = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/duck-top ];
+          modules = [ ./hosts/duck-top stylix.nixosModules.stylix ];
         };
       };
       homeConfigurations = {
         "ducky@duck-top" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./home/ducky/duck-top.nix
-            stylix.nixosModules.stylix
-          ];
+          modules =
+            [ ./home/ducky/duck-top.nix stylix.homeManagerModules.stylix ];
         };
       };
     };
