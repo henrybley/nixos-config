@@ -21,6 +21,7 @@
 
   stylix = {
     enable = true;
+    autoEnable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
     fonts = {
       sansSerif = {
@@ -33,7 +34,6 @@
       };
     };
     
-    targets.kitty.enable = true;
   };
 
   # The home.packages option allows you to install Nix packages into your
