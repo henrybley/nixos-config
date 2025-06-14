@@ -9,7 +9,7 @@
     };
     desktop = {
       wayland.enable = true;
-      hyprland.enaable = true;
+      hyprland.enable = true;
       waybar.enable = true;
     };
   };
