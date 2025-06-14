@@ -23,10 +23,16 @@
     enable = true;
     base16Scheme = "gruvbox-dark-hard";
     fonts = {
-      sansSerif = "JetBrains Mono";
-      monospace = "JetBrains Mono";
+      sansSerif = {
+        pakage = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        name = "JetBrainsMono Nerd Font Mono";
+      };
+      serif = {
+        pakage = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        name = "JetBrainsMono Nerd Font Mono";
+      };
     };
-
+    
     targets.kitty.enable = true;
   };
 
