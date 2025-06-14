@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./zsh.nix ./fzf.nix ./neofetch.nix ];
+  imports = [ ./kitty.nix ./zsh.nix ./fzf.nix ./neofetch.nix ];
 
   programs.eza = {
     enable = true;

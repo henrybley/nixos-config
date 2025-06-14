@@ -19,6 +19,9 @@
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
+  stylix.enable = true;
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
@@ -27,8 +30,6 @@
     mako
     swww
     rofi-wayland
-
-    kitty
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the

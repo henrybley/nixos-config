@@ -91,7 +91,6 @@
     neovim
 
     #cli
-    kitty
     wget
     git
     
