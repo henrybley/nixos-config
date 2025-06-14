@@ -41,9 +41,6 @@
   # environment.
   home.packages = with pkgs; [
     #environment
-    waybar
-    mako
-    swww
     rofi-wayland
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
