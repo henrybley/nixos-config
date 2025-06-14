@@ -116,12 +116,6 @@ in {
         # Gesture settings
         gestures = { workspace_swipe = false; };
 
-        # Per-device configuration
-        device = {
-          name = "epic-mouse-v1";
-          sensitivity = -0.5;
-        };
-
         # Key bindings
         bind = [
           # Application launchers
