@@ -92,9 +92,6 @@ in {
           force_split = 2;
         };
 
-        # Master layout settings
-        master = { new_status = "master"; };
-
         # Miscellaneous settings
         misc = {
           force_default_wallpaper = -1;
