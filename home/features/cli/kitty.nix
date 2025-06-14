@@ -10,18 +10,14 @@ in {
     programs.kitty = lib.mkForce {
       enable = true;
 
-      font = {
-        name = "JetBrains Mono";
-        size = 9.0;
-      };
+      #font = {
+            #  name = "JetBrains Mono";
+            #size = 9.0;
+            #};
 
       settings = { disable_ligatures = "always"; };
 
       extraConfig = ''
-        bold_font JetBrains Mono NL ExtraBold
-        italic_font auto
-        bold_italic_font auto
-
         cursor_trail 3
         cursor_trail_decay 0.1 0.4
       '';
