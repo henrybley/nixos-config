@@ -52,7 +52,10 @@
         "ducky@duck-top" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/ducky/duck-top.nix ];
+          modules = [
+            ./home/ducky/duck-top.nix
+            inputs.stylix.homeManagerModules.stylix
+          ];
         };
       };
     };
