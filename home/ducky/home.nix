@@ -23,7 +23,7 @@
     enable = true;
     autoEnable = true;
     base16Scheme =
-      "${pkgs.base16-schemes}/share/themes/atelier-sulphurpool.yaml";
+      "${pkgs.base16-schemes}/share/themes/monokai.yaml";
     cursor = {
       package = pkgs.material-cursors;
       name = "material_light_cursors";
