@@ -45,6 +45,7 @@
     cursor = {
       package = pkgs.material-cursors;
       name = "Material-Cursors";
+      size = 24;
     };
     fonts = {
       sansSerif = {
