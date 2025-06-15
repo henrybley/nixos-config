@@ -44,7 +44,7 @@
       "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
     cursor = {
       package = pkgs.material-cursors;
-      name = "Material-Cursors";
+      name = "material_cursors";
       size = 24;
     };
     fonts = {

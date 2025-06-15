@@ -36,7 +36,6 @@ in {
         env = [
           "XCURSOR_THEME, Material-Cursors"
           "XCURSOR_SIZE,24"
-          "HYPRCURSOR_SIZE,24"
           "QT_QPA_PLATFORMTHEME,qt6ct"
           "GTK_THEME,Dracula"
         ];
