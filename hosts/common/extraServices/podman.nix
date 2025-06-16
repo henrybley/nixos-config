@@ -3,7 +3,7 @@ with lib;
 let cfg = config.extraServices.podman;
 in {
   options.extraServices.podman.enable = mkEnableOption "enable podman";
-  vonfig = mkIf cfg.enable {
+  config = mkIf cfg.enable {
     virtualisation = {
       podman = {
         enable = true;
