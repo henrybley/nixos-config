@@ -65,6 +65,19 @@
     enable = true;
     displayManager.lightdm.enable = false;
   };
+  services.dbus.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+    ];
+  };
+
+  # Ensure Hyprland is installed system-wide
+  programs.hyprland.enable = true;
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
@@ -122,10 +135,6 @@
     brave
   ];
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
