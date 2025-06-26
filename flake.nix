@@ -43,17 +43,17 @@
         forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
       overlays = import ./overlays { inherit inputs; };
       nixosConfigurations = {
-        duck-top = nixpkgs.lib.nixosSystem {
+        think-duck = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/duck-top stylix.nixosModules.stylix ];
+          modules = [ ./hosts/think-duck stylix.nixosModules.stylix ];
         };
       };
       homeConfigurations = {
-        "ducky@duck-top" = home-manager.lib.homeManagerConfiguration {
+        "ducky@think-duck" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
           modules =
-            [ ./home/ducky/duck-top.nix stylix.homeManagerModules.stylix ];
+            [ ./home/ducky/think-duck.nix stylix.homeManagerModules.stylix ];
         };
       };
     };
