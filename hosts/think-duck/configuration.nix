@@ -2,10 +2,16 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -19,8 +25,7 @@
   networking.hostName = "think-duck"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable =
-    true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/Brussels";
@@ -40,8 +45,7 @@
   stylix = {
     enable = true;
     autoEnable = true;
-    base16Scheme =
-      "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
     cursor = {
       package = pkgs.material-cursors;
       name = "material_cursors";
@@ -117,6 +121,15 @@
   # services.libinput.enable = true;
 
   programs.firefox.enable = true;
+  programs.xfconf.enable = true;
+  programs.thunar.enable = true;
+  programs.thunar.plugins = with pkgs.xfce; [
+    thunar-archive-plugin
+    thunar-volman
+  ];
+  services.udisks2.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -134,7 +147,6 @@
     #browser
     brave
   ];
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -184,4 +196,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-
