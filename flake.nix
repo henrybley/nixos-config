@@ -27,7 +27,15 @@
     };
   };
 
-  outputs = { self, home-manager, stylix, nvim-config, nixpkgs, ... }@inputs:
+  outputs =
+    {
+      self,
+      home-manager,
+      stylix,
+      nvim-config,
+      nixpkgs,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       systems = [
@@ -38,22 +46,42 @@
         "x86_64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
-    in {
-      packages =
-        forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    in
+    {
+      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
       overlays = import ./overlays { inherit inputs; };
       nixosConfigurations = {
         think-duck = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/think-duck stylix.nixosModules.stylix ];
+          modules = [
+            ./hosts/think-duck
+            stylix.nixosModules.stylix
+          ];
+        };
+        desk-duck = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./hosts/desk-duck
+            stylix.nixosModules.stylix
+          ];
         };
       };
       homeConfigurations = {
         "ducky@think-duck" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules =
-            [ ./home/ducky/think-duck.nix stylix.homeManagerModules.stylix ];
+          modules = [
+            ./home/ducky/think-duck.nix
+            stylix.homeManagerModules.stylix
+          ];
+        };
+        "ducky@desk-duck" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            ./home/ducky/desk-duck.nix
+            stylix.homeManagerModules.stylix
+          ];
         };
       };
     };

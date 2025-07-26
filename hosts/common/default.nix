@@ -1,10 +1,24 @@
 # Common configuration for all hosts
-{ pkgs, lib, inputs, outputs, ... }: {
-  imports = [ ./users ./extraServices inputs.home-manager.nixosModules.home-manager ];
+{
+  pkgs,
+  lib,
+  inputs,
+  outputs,
+  ...
+}:
+{
+  imports = [
+    ./users
+    ./extraServices
+    inputs.home-manager.nixosModules.home-manager
+  ];
   home-manager = {
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs outputs; };
   };
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -43,8 +57,9 @@
       options = "--delete-older-than 30d";
     };
     optimise.automatic = true;
-    registry = (lib.mapAttrs (_: flake: { inherit flake; }))
-      ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+    registry = (lib.mapAttrs (_: flake: { inherit flake; })) (
+      (lib.filterAttrs (_: lib.isType "flake")) inputs
+    );
     nixPath = [ "/etc/nix/path" ];
   };
   users.defaultUserShell = pkgs.zsh;
