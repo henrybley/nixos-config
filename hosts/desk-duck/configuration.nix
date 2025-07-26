@@ -143,6 +143,7 @@
     #cli
     wget
     git
+    gcc
 
     #browser
     brave

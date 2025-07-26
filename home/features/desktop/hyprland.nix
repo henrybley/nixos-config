@@ -1,7 +1,9 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.features.desktop.hyprland;
-in {
+let
+  cfg = config.features.desktop.hyprland;
+in
+{
   options.features.desktop.hyprland.enable = mkEnableOption "hyprland config";
 
   config = mkIf cfg.enable {
@@ -9,6 +11,11 @@ in {
       enable = true;
       xwayland.enable = true;
       settings = {
+
+        monitor = [
+          "HDMI-A-1, 1920x1080, 1080x440 , 1"
+          "DP-2, 1920x1080, 0x0 , 1, transform, 1"
+        ];
 
         # Program variables
         "$terminal" = "kitty";
@@ -34,6 +41,7 @@ in {
 
         # Environment variables
         env = [
+          "HYPR_NO_CURSOR_WARPING,1"
           "XCURSOR_THEME, Material-Cursors"
           "XCURSOR_SIZE,24"
           "QT_QPA_PLATFORM,wayland"
@@ -94,11 +102,15 @@ in {
           kb_rules = "";
           follow_mouse = 1;
           sensitivity = 0;
-          touchpad = { natural_scroll = false; };
+          touchpad = {
+            natural_scroll = false;
+          };
         };
 
         # Gesture settings
-        gestures = { workspace_swipe = false; };
+        gestures = {
+          workspace_swipe = false;
+        };
 
         # Key bindings
         bind = [
@@ -124,8 +136,7 @@ in {
           "$mainMod SHIFT, MINUS, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 10%-"
 
           # Screenshot
-          ''
-            $mainMod Shift, S, exec, grim -g "$(slurp)" ~/Pictures/screenshots/$(date '+screenshot_%F_%H:%M:%S.png')''
+          ''$mainMod Shift, S, exec, grim -g "$(slurp)" ~/Pictures/screenshots/$(date '+screenshot_%F_%H:%M:%S.png')''
 
           # Focus movement (arrow keys)
           "$mainMod, left, movefocus, l"

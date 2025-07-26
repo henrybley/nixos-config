@@ -1,7 +1,12 @@
-{ config, pkgs, inputs, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+{
   users.users.ducky = {
-    initialHashedPassword =
-      "$y$j9T$Nx1fkTmVOuvRoavY3gtiZ.$Z7mBxr7Kh9mKeWaVxOaUPdG9MmwMCUQRDB6hFufrEY4";
+    initialHashedPassword = "$y$j9T$Nx1fkTmVOuvRoavY3gtiZ.$Z7mBxr7Kh9mKeWaVxOaUPdG9MmwMCUQRDB6hFufrEY4";
     isNormalUser = true;
     description = "ducky";
     extraGroups = [
@@ -21,7 +26,5 @@
     ];
     packages = [ inputs.home-manager.packages.${pkgs.system}.default ];
   };
-  home-manager.users.ducky =
-    import ../../../home/ducky/${config.networking.hostName}.nix;
+  home-manager.users.ducky = import ../../../home/ducky/${config.networking.hostName}.nix;
 }
-
