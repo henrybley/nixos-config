@@ -1,7 +1,19 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [ ./nvim.nix ];
 
+  programs = {
+    direnv = {
+      enable = true;
+      enableBashIntegration = true; # see note on other shells below
+      nix-direnv.enable = true;
+    };
+
+    zsh.enable = true;
+  };
+
   home.packages = with pkgs; [
+    gcc
     lua-language-server
     nil
     nixfmt-rfc-style
