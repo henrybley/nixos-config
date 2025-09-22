@@ -1,6 +1,10 @@
 { pkgs, ... }:
 {
-  imports = [ ./nvim.nix ];
+  imports = [
+    ./nvim.nix
+    ./git.nix
+    ./intellij.nix
+  ];
 
   programs = {
     direnv = {

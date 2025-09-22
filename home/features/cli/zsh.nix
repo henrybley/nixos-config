@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.features.cli.zsh;
-in {
-  options.features.cli.zsh.enable =
-    mkEnableOption "enable extended zsh configuration";
+let
+  cfg = config.features.cli.zsh;
+in
+{
+  options.features.cli.zsh.enable = mkEnableOption "enable extended zsh configuration";
 
   config = mkIf cfg.enable {
     programs.zsh = {
@@ -12,6 +18,10 @@ in {
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+      shellAliases = {
+        work-on = "sudo systemctl start openvpn-liftoff_vpn.service";
+        work-off = "sudo systemctl stop openvpn-liftoff_vpn.service";
+      };
       initContent = ''
         setopt autocd # auto cd when only path is entered
         setopt nomatch # throw an error on glob matching nothing
@@ -30,7 +40,7 @@ in {
         zstyle ':completion:*' menu select # select completions with arrow keys
         zstyle ':completion:*' group-name \'\' # group results by category
         zstyle ':completion:::::' completer _expand _complete _ignored _approximate #enable approximate matches for completion
-        export PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.spicetify
+        export PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin
         export NIX_PAGER=cat
         export PROMPT_EOL_MARK=" "
         [ -f "$HOME/.config/zsh/colors_and_functions.zsh" ] && source $HOME/.config/zsh/colors_and_functions.zsh
@@ -49,4 +59,3 @@ in {
     };
   };
 }
-

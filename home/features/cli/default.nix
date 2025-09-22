@@ -1,12 +1,25 @@
-{ pkgs, ... }: {
-  imports = [ ./kitty.nix ./zsh.nix ./fzf.nix ./neofetch.nix ];
+{ pkgs, ... }:
+{
+  imports = [
+    ./kitty.nix
+    ./zsh.nix
+    ./fzf.nix
+    ./neofetch.nix
+  ];
 
   programs.eza = {
     enable = true;
-    extraOptions = [ "-1" "--icons" "--git" "-a" ];
+    extraOptions = [
+      "-1"
+      "--icons"
+      "--git"
+      "-a"
+    ];
   };
 
-  programs.bat = { enable = true; };
+  programs.bat = {
+    enable = true;
+  };
 
   home.packages = with pkgs; [
     coreutils
@@ -18,6 +31,7 @@
     ripgrep
     tldr
     zip
+    unzip
   ];
 
 }

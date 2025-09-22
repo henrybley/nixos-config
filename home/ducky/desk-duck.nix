@@ -1,12 +1,22 @@
-{ config, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ../common
     ../features/cli
     ../features/develop
     ../features/desktop
+    ../features/streaming
+    ../features/misc
     ./home.nix
   ];
 
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+  };
   features = {
     cli = {
       kitty.enable = true;
@@ -16,13 +26,20 @@
     };
     desktop = {
       wayland.enable = true;
-
+      quickshell.enable = true;
       hyprland.enable = true;
-      waybar.enable = true;
+    };
+    misc = {
+      rclone.enable = true;
+    };
+    streaming = {
+      enable = true;
     };
   };
 
   wayland.windowManager.hyprland = {
-    settings = { monitor = [ ",preferred,auto,auto" ]; };
+    settings = {
+      monitor = [ ",preferred,auto,auto" ];
+    };
   };
 }

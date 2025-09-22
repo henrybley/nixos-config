@@ -7,6 +7,10 @@ in
   options.features.desktop.hyprland.enable = mkEnableOption "hyprland config";
 
   config = mkIf cfg.enable {
+    home.sessionVariables = {
+      XDG_SESSION_DESKTOP = "hyprland";
+    };
+
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -19,13 +23,10 @@ in
 
         # Program variables
         "$terminal" = "kitty";
-        "$fileManager" = "dolphin";
+        "$fileManager" = "thunar";
         "$browser" = "brave-browser";
         "$browser_private" = "brave-browser --incognito";
-        "$launcher" = "rofi -show drun -show-icons";
-        "$runner" = "$HOME/.config/rofi/bin/runner";
-        "$powermenu" = "$HOME/.config/rofi/bin/powermenu";
-        "$screenshot" = "$HOME/.config/rofi/bin/screenshot";
+        "$launcher" = "global, duck-shell:launcher";
 
         # Main modifier keys
         "$mainMod" = "SUPER";
@@ -33,10 +34,8 @@ in
 
         # Autostart applications
         "exec-once" = [
-          "waybar"
-          "hyprpaper"
+          "quickshell -dp ${config.home.homeDirectory}/nixos-config/home/features/desktop/quickshell/shell.qml"
           "hypridle"
-          "systemctl --user enable --now hyprland-autoname-workspaces.service"
         ];
 
         # Environment variables
@@ -46,7 +45,6 @@ in
           "XCURSOR_SIZE,24"
           "QT_QPA_PLATFORM,wayland"
           "QT_QPA_PLATFORMTHEME,qt6ct"
-          "GTK_THEME,Dracula"
         ];
 
         # General settings
@@ -107,18 +105,15 @@ in
           };
         };
 
-        # Gesture settings
-        gestures = {
-          workspace_swipe = false;
-        };
-
         # Key bindings
         bind = [
           # Application launchers
+          #bindi = Super, Super_L, global, caelestia:launcher
+          "$mainMod, Space, global, duck-shell:launcher"
           "$mainMod, Return, exec, $terminal"
           "$mainMod, B, exec, $browser"
           "$mainMod, F, exec, $fileManager"
-          "$mainMod, Space, exec, $launcher"
+          "$mainMod SHIFT, Space, exec, $launcher"
           "$mainMod, D, exec, $powermenu"
 
           # Window management
@@ -219,6 +214,26 @@ in
           "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
         ];
       };
+    };
+
+    services.hyprpaper.enable = true;
+
+    services.hyprpaper.settings = {
+      ipc = "on"; # optional, enables IPC
+      splash = false; # disable splash screen
+      splash_offset = 2.0; # optional timing offset
+
+      # preload wallpapers (optional)
+      preload = [
+        "${config.home.homeDirectory}/Pictures/backgrounds/horizontal.jpg"
+        "${config.home.homeDirectory}/Pictures/backgrounds/vertical.jpg"
+      ];
+
+      # assign wallpapers to monitors
+      wallpaper = [
+        "HDMI-A-1,${config.home.homeDirectory}/Pictures/backgrounds/horizontal.jpg"
+        "DP-2,${config.home.homeDirectory}/Pictures/backgrounds/vertical.jpg"
+      ];
     };
 
     programs.zsh.profileExtra = ''

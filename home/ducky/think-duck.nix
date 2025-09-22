@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   imports = [
     ../common
     ../features/cli
@@ -20,9 +21,14 @@
       hyprland.enable = true;
       waybar.enable = true;
     };
+    misc = {
+      hetzner-storage.enable = true;
+    };
   };
 
   wayland.windowManager.hyprland = {
-    settings = { monitor = [ ",preferred,auto,auto" ]; };
+    settings = {
+      monitor = [ ",preferred,auto,auto" ];
+    };
   };
 }
