@@ -42,6 +42,8 @@
   extraServices.gaming.enable = true;
   extraServices.music-production.enable = true;
   extraServices.podman.enable = true;
+  extraServices.printing.enable = true;
   extraServices.ovpn.enable = true;
   extraServices.streaming.enable = true;
+  extraServices.virtualisation.enable = true;
 }

@@ -118,10 +118,8 @@ in
 
           # Window management
           "$mainMod SHIFT, Q, killactive,"
-          "$mainMod SHIFT, M, exit,"
           "$mainMod, V, togglefloating,"
           "$mainMod, S, togglesplit,"
-          "$mainMod SHIFT, B, exec, ~/.config/waybar/launch.sh"
           "$mainMod SHIFT, T, togglefloating"
 
           # Volume controls

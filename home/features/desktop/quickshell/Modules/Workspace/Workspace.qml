@@ -140,13 +140,13 @@ Item {
                             return 6;
                     }
                     color: {
-                        if (model.isFocused)
-                            return Config.colours.textPrimary;
-                        else if (model.isActive)
-                            return Config.colours.accentPrimary
                         if (model.isUrgent)
                             return Config.colours.error;
-                        //not yet used
+                        if (model.isFocused)
+                            return Config.colours.textPrimary;
+                        if (model.isActive)
+                            return Config.colours.accentPrimary
+                                                //not yet used
                         /*if(model.output != root.screen.name) { 
                             return Config.colours.textPrimary
                         }*/

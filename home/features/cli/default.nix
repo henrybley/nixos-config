@@ -21,6 +21,10 @@
     enable = true;
   };
 
+  programs.zsh.shellAliases = {
+    cat = "bat";
+  };
+
   home.packages = with pkgs; [
     coreutils
     fd

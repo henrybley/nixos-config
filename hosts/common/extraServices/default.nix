@@ -5,6 +5,8 @@
         ./music-production.nix
         ./ovpn.nix
         ./podman.nix
+        ./printing.nix
         ./streaming.nix
+        ./virtualisation.nix
     ];
 }
