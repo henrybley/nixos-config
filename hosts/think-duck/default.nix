@@ -38,6 +38,12 @@
 {
   imports = [ ../common ./configuration.nix ];
 
+  extraServices.ai.enable = false;
+  extraServices.gaming.enable = true;
+  extraServices.music-production.enable = false;
   extraServices.podman.enable = true;
+  extraServices.printing.enable = true;
   extraServices.ovpn.enable = true;
+  extraServices.streaming.enable = false;
+  extraServices.virtualisation.enable = false;
 }
