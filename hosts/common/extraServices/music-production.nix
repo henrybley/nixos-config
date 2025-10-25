@@ -42,7 +42,7 @@ in
       
       # Native Linux VSTs and Synthesizers
       vital # Vital wavetable synthesizer (from nixpkgs!)
-      surge-XT # Another excellent wavetable synth
+      #surge-XT # Another excellent wavetable synth
       cardinal # VCV Rack fork
       
       # Effects and Processing

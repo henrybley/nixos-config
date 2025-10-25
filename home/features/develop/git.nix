@@ -19,10 +19,9 @@
 
   programs.git = {
     enable = true;
-    userName = "Henry Bley";
-    userEmail = "me@henrybley.com";
-
-    extraConfig = {
+    settings = {
+      user.name = "Henry Bley";
+      user.email = "me@henrybley.com";
       push.autoSetupRemote = true;
       core.pager = "delta";
     };
