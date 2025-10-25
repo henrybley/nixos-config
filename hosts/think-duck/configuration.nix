@@ -6,6 +6,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -13,6 +14,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    inputs.sops-nix.nixosModules.sops
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -20,7 +22,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
   networking.hostName = "think-duck"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -42,6 +44,9 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+  #sops.defaultSopsFile = ../../secrets/hetzner_storage.yaml;
+  #sops.defeaultSopsFormat = "yaml";
+
   stylix = {
     enable = true;
     autoEnable = true;
@@ -61,21 +66,27 @@
         name = "JetBrainsMono Nerd Font Mono";
       };
     };
+    fonts.sizes = {
+      applications = 10;
+      terminal = 13;
+      desktop = 10;
+      popups = 10;
+    };
 
   };
 
   # Enable the X11 windowing system.
   services.xserver = {
-    enable = true;
-    displayManager.lightdm.enable = false;
+    enable = false;
   };
   services.dbus.enable = true;
+  #utilities
+  services.upower.enable = true;
 
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
     extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
     ];
   };
@@ -90,12 +101,18 @@
 
   programs.zsh.enable = true;
 
-  hardware = {
-    # Opengl
-    # Opengl.enable = true;
-
-    nvidia.modesetting.enable = true;
+  hardware.graphics = {
+    enable = true; # enables the GPU driver (amdgpu, nvidia, intel, etc.)
+    enable32Bit = true; # optional 32-bit support for Steam/Games
+    #driSupport = true; # enables direct rendering
+    extraPackages = with pkgs; [
+      vulkan-tools
+      vulkan-validation-layers
+      rocmPackages.clr.icd
+    ];
   };
+  programs.gamescope.enable = true;
+  boot.initrd.kernelModules = [ "amdgpu" ];
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -127,26 +144,72 @@
     thunar-archive-plugin
     thunar-volman
   ];
+
   services.udisks2.enable = true;
   services.gvfs.enable = true;
   services.tumbler.enable = true;
 
+  fonts.packages = with pkgs; [
+    material-symbols
+  ];
+
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
+    #security
+    sops
+    age
+
+    thunderbird
+
+    #3d
+    blender
+
+    #pictures
+    darktable
+    gimp3-with-plugins
+
+    #audio
+    pavucontrol
+    vlc
+
     #editors
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     neovim
 
+    filezilla
+    dbeaver-bin
+
     #cli
     wget
     git
+    devenv
+    direnv
 
-    #utlities
+    #utilities
+    clinfo
+    file-roller
+    libnotify
     cava
+    upower
+    lm_sensors
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-utils
+
+    #tools
+    qalculate-gtk
 
     #browser
     brave
+
+    #Gaming
+    # Vulkan/OpenGL tools
+    vulkan-tools
+    vulkan-validation-layers
+
+    # Wayland/XWayland
+    xwayland
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

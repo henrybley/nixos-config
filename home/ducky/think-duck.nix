@@ -1,13 +1,22 @@
-{ config, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../common
     ../features/cli
     ../features/develop
     ../features/desktop
+    ../features/streaming
+    ../features/misc
     ./home.nix
   ];
 
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+  };
   features = {
     cli = {
       kitty.enable = true;
@@ -17,12 +26,13 @@
     };
     desktop = {
       wayland.enable = true;
-
       hyprland.enable = true;
-      waybar.enable = true;
     };
     misc = {
-      hetzner-storage.enable = true;
+      rclone.enable = true;
+    };
+    streaming = {
+      enable = false;
     };
   };
 
