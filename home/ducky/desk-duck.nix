@@ -26,7 +26,6 @@
     };
     desktop = {
       wayland.enable = true;
-      quickshell.enable = true;
       hyprland.enable = true;
     };
     misc = {

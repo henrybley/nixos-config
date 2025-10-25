@@ -26,6 +26,7 @@
   };
 
   home.packages = with pkgs; [
+    tree
     coreutils
     fd
     btop

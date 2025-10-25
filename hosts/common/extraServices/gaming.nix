@@ -15,6 +15,7 @@ in
     programs.steam.gamescopeSession.enable = true;
 
     environment.systemPackages = with pkgs; [
+      gamescope
       mangohud
       protonup
     ];
