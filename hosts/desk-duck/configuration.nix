@@ -50,7 +50,8 @@
   stylix = {
     enable = true;
     autoEnable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
+    #base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/onedark-dark.yaml";
     cursor = {
       package = pkgs.material-cursors;
       name = "material_cursors";
@@ -95,6 +96,7 @@
   programs.hyprland.enable = true;
 
   environment.sessionVariables = {
+    OZONE_PLATFORM = "x11";
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
   };
@@ -169,7 +171,11 @@
     darktable
     gimp3-with-plugins
 
+    #music
+    feishin
+
     #audio
+    easyeffects
     pavucontrol
     vlc
 

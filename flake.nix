@@ -6,7 +6,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
@@ -23,7 +23,8 @@
       flake = false;
     };
     duckshell = {
-      url = "path:/home/ducky/.config/duckshell";
+      url = "git+https://github.com/henrybley/duckshell.git";
+      #url = "path:/home/ducky/.config/duckshell";
     };
   };
   outputs =

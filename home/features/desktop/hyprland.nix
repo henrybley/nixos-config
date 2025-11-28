@@ -24,7 +24,7 @@ in
         # Program variables
         "$terminal" = "kitty";
         "$fileManager" = "thunar";
-        "$browser" = "brave-browser";
+        "$browser" = "brave --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1";
         "$browser_private" = "brave-browser --incognito";
         "$launcher" = "global, duck-shell:launcher";
 
@@ -210,6 +210,9 @@ in
           "size 900 600, class:(rust-extractor)"
           "suppressevent maximize, class:.*"
           "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+          "float,class:xdg-desktop-portal-gtk"
+          "float,class:thunar"
+          "float,class:everything-dies"
         ];
       };
     };

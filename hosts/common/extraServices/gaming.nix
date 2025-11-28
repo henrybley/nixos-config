@@ -17,7 +17,7 @@ in
     environment.systemPackages = with pkgs; [
       gamescope
       mangohud
-      protonup
+      protonup-ng
     ];
 
     programs.gamemode.enable = true;

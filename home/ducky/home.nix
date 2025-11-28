@@ -42,7 +42,8 @@
       light = "Reversal";
       dark = "Reversal";
     };
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-storm.yaml";
+    #base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-storm.yaml";
+    base16Scheme = "${config.xdg.configHome}/duck-colors/dark-duck.yaml";
     cursor = {
       package = pkgs.material-cursors;
       name = "material_light_cursors";
@@ -115,5 +116,5 @@
   #
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  #programs.home-manager.enable = true;
 }
