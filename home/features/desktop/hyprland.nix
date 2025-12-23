@@ -34,7 +34,7 @@ in
 
         # Autostart applications
         "exec-once" = [
-          "quickshell -dp ${config.home.homeDirectory}/.config/duckshell/quickshell/shell.qml"
+          "quickshell -dp ${config.home.homeDirectory}/.config/duckshell/shell.qml"
           "hypridle"
         ];
 

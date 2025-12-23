@@ -4,9 +4,9 @@
   '';
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
@@ -23,8 +23,9 @@
       flake = false;
     };
     duckshell = {
-      url = "git+https://github.com/henrybley/duckshell.git";
-      #url = "path:/home/ducky/.config/duckshell";
+      #url = "git+https://github.com/henrybley/duckshell.git";
+      url = "git+file:/home/ducky/.config/duckshell";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs =
@@ -65,7 +66,6 @@
               home-manager.extraSpecialArgs = { inherit inputs outputs; };
               home-manager.users.ducky = import ./home/ducky/think-duck.nix;
               home-manager.sharedModules = [
-                inputs.sops-nix.homeManagerModules.sops
                 duckshell.homeManagerModules.default
               ];
             }
@@ -85,34 +85,10 @@
               home-manager.users.ducky = import ./home/ducky/desk-duck.nix;
               home-manager.sharedModules = [
                 inputs.sops-nix.homeManagerModules.sops
-                duckshell.homeManagerModules.default
               ];
             }
           ];
         };
       };
-      # Keep standalone configs for manual testing if needed
-      # homeConfigurations = {
-      #   "ducky@think-duck" = home-manager.lib.homeManagerConfiguration {
-      #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
-      #     extraSpecialArgs = { inherit inputs outputs; };
-      #     modules = [
-      #       ./home/ducky/think-duck.nix
-      #       stylix.homeManagerModules.stylix
-      #       inputs.sops-nix.homeManagerModules.sops
-      #       duckshell.homeManagerModules.default
-      #     ];
-      #   };
-      #   "ducky@desk-duck" = home-manager.lib.homeManagerConfiguration {
-      #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
-      #     extraSpecialArgs = { inherit inputs outputs; };
-      #     modules = [
-      #       ./home/ducky/desk-duck.nix
-      #       stylix.homeManagerModules.stylix
-      #       inputs.sops-nix.homeManagerModules.sops
-      #       duckshell.homeManagerModules.default
-      #     ];
-      #   };
-      # };
     };
 }

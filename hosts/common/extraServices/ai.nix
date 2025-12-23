@@ -13,7 +13,7 @@ in
   config = mkIf cfg.enable {
     services.ollama = {
       enable = true;
-      acceleration = "rocm";
+      package = pkgs.ollama-rocm;
       # Optional: preload models, see https://ollama.com/library
       loadModels = [
         "codellama:7b"

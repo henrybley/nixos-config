@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ./wayland.nix
@@ -8,7 +8,6 @@
   ];
 
   home.packages = with pkgs; [
-
+    inputs.duckshell.packages.${pkgs.system}.duckshell
   ];
-
 }
