@@ -22,86 +22,79 @@ in
     enable = mkEnableOption "Enable Music Production";
   };
   
-  config = mkIf cfg.enable {
-    # Musnix configuration - always enabled when music-production is enabled
-    musnix = {
-      enable = true;
-      kernel.realtime = true;
-      das_watchdog.enable = true;
-      rtirq.enable = true;
-    };
-    
-    environment.systemPackages = with pkgs; [
-      # DAW
-      bitwig-studio
+  config = mkMerge [
+    (mkIf cfg.enable {
+      # Only set musnix options if musnix module is available
+      # This will silently do nothing if musnix isn't imported
+      musnix = mkIf (hasAttr "musnix" options) {
+        enable = true;
+        kernel.realtime = true;
+        das_watchdog.enable = true;
+        rtirq.enable = true;
+      };
       
-      # VST Support
-      yabridge # For running Windows VSTs on Linux
-      wine # Required for yabridge
-      winetricks # Wine configuration helper
+      environment.systemPackages = with pkgs; [
+        # DAW
+        bitwig-studio
+        
+        # VST Support
+        yabridge
+        wine
+        winetricks
+        
+        # Native Linux VSTs and Synthesizers
+        vital
+        cardinal
+        
+        # Effects and Processing
+        calf
+        lsp-plugins
+        x42-plugins
+        zam-plugins
+        
+        # Audio utilities
+        qjackctl
+        helvum
+        pavucontrol
+        
+        # Plugin hosts and utilities
+        carla
+        jalv
+        
+        # Audio analysis and utilities
+        sonic-visualiser
+      ];
       
-      # Native Linux VSTs and Synthesizers
-      vital # Vital wavetable synthesizer (from nixpkgs!)
-      #surge-XT # Another excellent wavetable synth
-      cardinal # VCV Rack fork
+      # Enhanced environment variables for plugin discovery
+      environment.variables = {
+        DSSI_PATH = mkDefault (makePluginPath "dssi");
+        LADSPA_PATH = mkDefault (makePluginPath "ladspa");
+        LV2_PATH = mkDefault (makePluginPath "lv2");
+        LXVST_PATH = mkDefault (makePluginPath "lxvst");
+        VST_PATH = mkDefault (makePluginPath "vst");
+        VST3_PATH = mkDefault (makePluginPath "vst3");
+        CLAP_PATH = mkDefault (makePluginPath "clap");
+      };
       
-      # Effects and Processing
-      calf # Comprehensive plugin suite
-      lsp-plugins # Professional audio plugins
-      x42-plugins # Collection of LV2 plugins
-      zam-plugins # High-quality audio plugins
+      # Additional audio-specific system configuration
+      security.pam.loginLimits = [
+        { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
+        { domain = "@audio"; item = "rtprio"; type = "-"; value = "95"; }
+        { domain = "@audio"; item = "nofile"; type = "soft"; value = "99999"; }
+        { domain = "@audio"; item = "nofile"; type = "hard"; value = "99999"; }
+      ];
       
-      # Audio utilities
-      qjackctl # JACK control GUI (works with PipeWire's JACK layer)
-      helvum # PipeWire graph editor
-      pavucontrol # PulseAudio volume control (works with PipeWire)
+      # Ensure audio group exists and has proper permissions
+      users.groups.audio = {};
       
-      # Plugin hosts and utilities
-      carla # Plugin host and rack
-      jalv # Simple LV2 host
+      # CPU governor for consistent performance
+      powerManagement.cpuFreqGovernor = "performance";
       
-      # Audio analysis and utilities
-      sonic-visualiser # Audio analysis tool
-    ];
-    
-    # Enhanced environment variables for plugin discovery
-    environment.variables = {
-      # Use mkDefault to allow other modules to override these paths
-      DSSI_PATH = mkDefault (makePluginPath "dssi");
-      LADSPA_PATH = mkDefault (makePluginPath "ladspa");
-      LV2_PATH = mkDefault (makePluginPath "lv2");
-      LXVST_PATH = mkDefault (makePluginPath "lxvst");
-      VST_PATH = mkDefault (makePluginPath "vst");
-      VST3_PATH = mkDefault (makePluginPath "vst3");
-      CLAP_PATH = mkDefault (makePluginPath "clap"); # For future CLAP plugin support
-    };
-    
-    # Additional audio-specific system configuration
-    # (These complement musnix but are also useful without it)
-    security.pam.loginLimits = [
-      { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
-      { domain = "@audio"; item = "rtprio"; type = "-"; value = "95"; }
-      { domain = "@audio"; item = "nofile"; type = "soft"; value = "99999"; }
-      { domain = "@audio"; item = "nofile"; type = "hard"; value = "99999"; }
-    ];
-    
-    # Ensure audio group exists and has proper permissions
-    users.groups.audio = {};
-    
-    # Optional: Add current user to audio group automatically
-    # users.users.${config.users.users.*.name}.extraGroups = [ "audio" ];
-    
-    # System-level optimizations are handled by musnix
-    # No additional kernel params needed
-    
-    # CPU governor for consistent performance
-    powerManagement.cpuFreqGovernor = "performance";
-    
-    # Additional services that can help with audio production
-    services.udev.extraRules = ''
-      # Increase priority for audio interfaces
-      SUBSYSTEM=="usb", ATTRS{idVendor}=="*", ATTRS{idProduct}=="*", TAG+="uaccess"
-      # Add more specific rules for your audio interface if needed
-    '';
-  };
+      # Additional services that can help with audio production
+      services.udev.extraRules = ''
+        # Increase priority for audio interfaces
+        SUBSYSTEM=="usb", ATTRS{idVendor}=="*", ATTRS{idProduct}=="*", TAG+="uaccess"
+      '';
+    })
+  ];
 }

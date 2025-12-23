@@ -77,14 +77,17 @@
         "quickshell": "quickshell"
       },
       "locked": {
-        "lastModified": 1766386046,
-        "narHash": "sha256-6s7Ps6OZummkfhuMdwTCkAxNh/kzAl7T3s5oMohIY0A=",
-        "path": "/home/ducky/.config/duckshell",
-        "type": "path"
+        "lastModified": 1766497986,
+        "narHash": "sha256-Pyx2484EX09mT2z7BqWW2nso7rSzr2t6DZWizW6wuIQ=",
+        "ref": "refs/heads/main",
+        "rev": "407d5b25f3e84cfb6f4f7e93cd093da361bd0287",
+        "revCount": 7,
+        "type": "git",
+        "url": "file:/home/ducky/.config/duckshell"
       },
       "original": {
-        "path": "/home/ducky/.config/duckshell",
-        "type": "path"
+        "type": "git",
+        "url": "file:/home/ducky/.config/duckshell"
       }
     },
     "firefox-gnome-theme": {
