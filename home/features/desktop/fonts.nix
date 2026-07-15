@@ -1,4 +1,4 @@
 { config, lib, pkgs, ... }:
 with lib; {
-  home.packages = with pkgs; [ font-manager nerd-fonts.jetbrains-mono  ];
+  home.packages = with pkgs; [ font-manager nerd-fonts.jetbrains-mono inter-nerdfont nerd-fonts.heavy-data  ];
 }

@@ -7,21 +7,23 @@
 with lib;
 let
   cfg = config.extraServices.music-production;
-  
+
   # Helper function for plugin paths (from musnix documentation)
-  makePluginPath = format:
+  makePluginPath =
+    format:
     (makeSearchPath format [
       "$HOME/.nix-profile/lib"
       "/run/current-system/sw/lib"
       "/etc/profiles/per-user/$USER/lib"
     ])
     + ":$HOME/.${format}";
+  vstPlugins = import ../../../pkgs/vst3-plugins.nix { inherit pkgs; };
 in
 {
   options.extraServices.music-production = {
     enable = mkEnableOption "Enable Music Production";
   };
-  
+
   config = mkMerge [
     (mkIf cfg.enable {
       # Only set musnix options if musnix module is available
@@ -32,39 +34,45 @@ in
         das_watchdog.enable = true;
         rtirq.enable = true;
       };
-      
+
       environment.systemPackages = with pkgs; [
+        #DJing
+        mixxx
+
         # DAW
         bitwig-studio
-        
+
         # VST Support
         yabridge
         wine
         winetricks
-        
+
         # Native Linux VSTs and Synthesizers
         vital
         cardinal
-        
+
+        vstPlugins.Polarity-MD
+        vstPlugins.Polarity-SC-Dark
+
         # Effects and Processing
         calf
         lsp-plugins
         x42-plugins
         zam-plugins
-        
+
         # Audio utilities
         qjackctl
         helvum
         pavucontrol
-        
+
         # Plugin hosts and utilities
         carla
         jalv
-        
+
         # Audio analysis and utilities
         sonic-visualiser
       ];
-      
+
       # Enhanced environment variables for plugin discovery
       environment.variables = {
         DSSI_PATH = mkDefault (makePluginPath "dssi");
@@ -75,21 +83,41 @@ in
         VST3_PATH = mkDefault (makePluginPath "vst3");
         CLAP_PATH = mkDefault (makePluginPath "clap");
       };
-      
+
       # Additional audio-specific system configuration
       security.pam.loginLimits = [
-        { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
-        { domain = "@audio"; item = "rtprio"; type = "-"; value = "95"; }
-        { domain = "@audio"; item = "nofile"; type = "soft"; value = "99999"; }
-        { domain = "@audio"; item = "nofile"; type = "hard"; value = "99999"; }
+        {
+          domain = "@audio";
+          item = "memlock";
+          type = "-";
+          value = "unlimited";
+        }
+        {
+          domain = "@audio";
+          item = "rtprio";
+          type = "-";
+          value = "95";
+        }
+        {
+          domain = "@audio";
+          item = "nofile";
+          type = "soft";
+          value = "99999";
+        }
+        {
+          domain = "@audio";
+          item = "nofile";
+          type = "hard";
+          value = "99999";
+        }
       ];
-      
+
       # Ensure audio group exists and has proper permissions
-      users.groups.audio = {};
-      
+      users.groups.audio = { };
+
       # CPU governor for consistent performance
       powerManagement.cpuFreqGovernor = "performance";
-      
+
       # Additional services that can help with audio production
       services.udev.extraRules = ''
         # Increase priority for audio interfaces

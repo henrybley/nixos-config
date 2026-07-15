@@ -43,7 +43,7 @@
       dark = "Reversal";
     };
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-storm.yaml";
-    base16Scheme = "${config.xdg.configHome}/duck-colors/dark-duck.yaml";
+    base16Scheme = "${config.xdg.configHome}/duck-colors/grey-duck.yaml";
     cursor = {
       package = pkgs.material-cursors;
       name = "material_light_cursors";

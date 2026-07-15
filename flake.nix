@@ -5,6 +5,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-bleeding.url = "github:NixOS/nixpkgs/master";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,6 +28,11 @@
       url = "git+file:/home/ducky/.config/duckshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    winapps = {
+      url = "github:winapps-org/winapps";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -37,6 +43,7 @@
       stylix,
       nvim-config,
       duckshell,
+      winapps,
       ...
     }@inputs:
     let
@@ -51,7 +58,6 @@
       forAllSystems = nixpkgs.lib.genAttrs systems;
     in
     {
-      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
       overlays = import ./overlays { inherit inputs; };
       nixosConfigurations = {
         think-duck = nixpkgs.lib.nixosSystem {
@@ -87,6 +93,18 @@
                 inputs.sops-nix.homeManagerModules.sops
               ];
             }
+            (
+              {
+                pkgs,
+                ...
+              }:
+              {
+                environment.systemPackages = [
+                  winapps.packages."${pkgs.system}".winapps
+                  winapps.packages."${pkgs.system}".winapps-launcher # optional
+                ];
+              }
+            )
           ];
         };
       };

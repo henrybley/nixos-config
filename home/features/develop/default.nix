@@ -17,6 +17,8 @@
   };
 
   home.packages = with pkgs; [
+    mprocs
+    tabiew
     gcc
     lua-language-server
     nil
@@ -28,6 +30,7 @@
     rust-analyzer
     stylua
     typescript-language-server
+    rainfrog
   ];
 
 }

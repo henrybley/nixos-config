@@ -17,8 +17,9 @@ in
       settings = {
 
         monitor = [
-          "HDMI-A-1, 1920x1080, 1080x440 , 1"
-          "DP-2, 1920x1080, 0x0 , 1, transform, 1"
+          "DP-1, 1920x1080, 0x0, 1, transform, 2"
+          "HDMI-A-1, 1920x1080, 0x1080, 1, transform, 2"
+          #"HDMI-A-1, 1920x1080, 0x1080, 1"
         ];
 
         # Program variables
@@ -233,7 +234,7 @@ in
       # assign wallpapers to monitors
       wallpaper = [
         "HDMI-A-1,${config.home.homeDirectory}/Pictures/backgrounds/horizontal.jpg"
-        "DP-2,${config.home.homeDirectory}/Pictures/backgrounds/vertical.jpg"
+        "DP-1,${config.home.homeDirectory}/Pictures/backgrounds/horizontal.jpg"
       ];
     };
 

@@ -86,9 +86,10 @@
 
   xdg.portal = {
     enable = true;
-    xdgOpenUsePortal = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    config.hyprland.default = [
+      "hyprland"
+      "gtk"
     ];
   };
 
@@ -102,6 +103,9 @@
   };
 
   programs.zsh.enable = true;
+
+  #compatibility layer for basic FHS apps
+  programs.nix-ld.enable = true;
 
   hardware.graphics = {
     enable = true; # enables the GPU driver (amdgpu, nvidia, intel, etc.)
@@ -158,6 +162,13 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
+    google-chrome
+    ## for polarity MD
+    webkitgtk_4_1
+    gtk3
+    glib
+    libsoup_3
+
     #security
     sops
     age
@@ -166,6 +177,9 @@
 
     #3d
     blender
+
+    #2d
+    inkscape
 
     #pictures
     darktable
@@ -202,9 +216,12 @@
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-utils
+    wl-mirror
 
     #tools
     qalculate-gtk
+    gnumeric
+    feh
 
     #browser
     brave

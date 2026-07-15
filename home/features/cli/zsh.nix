@@ -23,6 +23,7 @@ in
         work-off = "sudo systemctl stop openvpn-liftoff_vpn.service";
       };
       initContent = ''
+        setopt aliases
         setopt autocd # auto cd when only path is entered
         setopt nomatch # throw an error on glob matching nothing
         setopt nonomatch
@@ -43,6 +44,8 @@ in
         export PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin
         export NIX_PAGER=cat
         export PROMPT_EOL_MARK=" "
+        # npm → socket npm wrapper
+        alias npm='socket npm'
         [ -f "$HOME/.config/zsh/colors_and_functions.zsh" ] && source $HOME/.config/zsh/colors_and_functions.zsh
       '';
       oh-my-zsh = {

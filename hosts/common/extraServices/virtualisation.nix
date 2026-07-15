@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.extraServices.virtualisation;
@@ -17,6 +22,7 @@ in
       spice-protocol
       virtio-win
       win-spice
+      virtiofsd
     ];
 
     virtualisation = {
@@ -24,6 +30,7 @@ in
         enable = true;
         qemu = {
           swtpm.enable = true;
+          vhostUserPackages = [ pkgs.virtiofsd ];
         };
       };
       spiceUSBRedirection.enable = true;
